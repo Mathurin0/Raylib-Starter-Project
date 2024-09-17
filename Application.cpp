@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "application.h"
 #include <iostream>
 
 Application::Application() {
@@ -11,7 +11,7 @@ void Application::Init() {
 	InitWindow(WINDOW_SIZE.x, WINDOW_SIZE.y, "Casse Brique");
 	SetTargetFPS(FPS_LIMIT);
 
-	meSceneManager = new SceneManager();
+	 mSceneManager = new SceneManager();
 
 	while (!WindowShouldClose()) {
 		Update();
@@ -21,13 +21,9 @@ void Application::Init() {
 	CloseWindow();
 }
 
-void SceneManager::Init() {
-	ChangeScene(Game);
-}
-
 void Application::Update() {
 	float deltatime = GetFrameTime();
-	meSceneManager->Update(deltatime);
+	mSceneManager->Update(deltatime);
 }
 
 void Application::Draw() {
@@ -35,7 +31,7 @@ void Application::Draw() {
 
 	ClearBackground(BACKGROUND_COLOR);
 
-	meSceneManager->Draw();
+	mSceneManager->Draw();
 
 	EndDrawing();
 }

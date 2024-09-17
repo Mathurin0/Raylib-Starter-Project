@@ -12,6 +12,6 @@ private :
 	void Init();
 	void Update();
 	void Draw();
-};
 
-extern Application* meApp;
+	SceneManager* mSceneManager;
+};

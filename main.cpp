@@ -5,6 +5,6 @@
 using namespace std;
 
 int main() {
-    meApp = new Application();
+    Application app = Application();
     return 0;
 }

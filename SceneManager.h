@@ -1,8 +1,9 @@
 #pragma once
 #include "scene.h"
+#include "game.h"
 
 enum Scenes {
-	Game
+	GameScene
 };
 
 class SceneManager
@@ -14,12 +15,10 @@ public:
 	void Update(float deltaTime);
 	void Draw();
 
-	void ChangeScene();
-	void LoadScene();
+	void ChangeScene(Scenes sceneToOpen);
+	void LoadScene(int index);
 
 private:
 	Scene* mCurrentScene;
 	void Init();
 };
-
-extern SceneManager* meSceneManager;
