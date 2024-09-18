@@ -1,5 +1,4 @@
 #include "constant.h"
-#include "SceneManager.h"
 
 #pragma once
 class Application
@@ -12,6 +11,4 @@ private :
 	void Init();
 	void Update();
 	void Draw();
-
-	SceneManager* mSceneManager;
 };

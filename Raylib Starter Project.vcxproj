@@ -137,10 +137,14 @@
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="brick.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameManager.cpp" />
+    <ClCompile Include="lose.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="win.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
@@ -148,9 +152,13 @@
     <ClInclude Include="brick.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameManager.h" />
+    <ClInclude Include="lose.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="paddle.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="win.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

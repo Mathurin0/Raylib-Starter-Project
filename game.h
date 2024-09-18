@@ -1,6 +1,6 @@
 #pragma once
 #include "scene.h"
-#include "sceneManager.h"
+#include "gameManager.h"
 #include "paddle.h"
 #include "ball.h"
 #include "brick.h"
@@ -21,7 +21,9 @@ public :
 private :
 	Paddle* mPaddle;
 	Ball* mBall;
+	GameManager* mGameManager;
 	std::vector<Brick> mBricks;
 	int mBricksAmount;
+	bool mBallLaunched;
 };
 

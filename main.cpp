@@ -1,6 +1,4 @@
-#include "raylib.h"
 #include "application.h"
-#include <iostream>
 
 using namespace std;
 

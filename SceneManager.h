@@ -1,9 +1,17 @@
 #pragma once
+#ifndef SCENE_MANAGER
+#define SCENE_MANAGER
 #include "scene.h"
 #include "game.h"
+#include "lose.h"
+#include "menu.h"
+#include "win.h"
 
 enum Scenes {
-	GameScene
+	MenuScene,
+	GameScene,
+	WinScene,
+	LoseScene
 };
 
 class SceneManager
@@ -16,9 +24,11 @@ public:
 	void Draw();
 
 	void ChangeScene(Scenes sceneToOpen);
-	void LoadScene(int index);
 
 private:
 	Scene* mCurrentScene;
 	void Init();
 };
+
+extern SceneManager* mSceneManager;
+#endif

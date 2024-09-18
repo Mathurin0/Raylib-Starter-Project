@@ -11,6 +11,8 @@ const int FPS_LIMIT = 60;
 const Color BACKGROUND_COLOR = DARKBLUE;
 const Color OBJECTS_COLOR = WHITE;
 
+const int START_HEALTH = 5;
+
 
 // PADDLE
 
@@ -26,7 +28,7 @@ const int BALL_SPEED = 8;
 
 
 // BRICKS
-
+ 
 const int BRICK_HEIGHT = 40;
 const int BRICK_WIDTH = 120;
 const int BRICKS_SPACING = 4;

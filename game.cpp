@@ -11,6 +11,9 @@ Game::~Game() {
 void Game::Init() {
 	mPaddle = new Paddle();
 	mBall = new Ball();
+	mGameManager = new GameManager();
+	mBallLaunched = false;
+	mBall->Launch(); //TODO corriger
 
 	// Init bricks
 	for (int i = 0; i < BRICKS_AMOUNT; i++)
@@ -25,16 +28,37 @@ void Game::Init() {
 		mBricks[i].Draw();
 	}
 	mBricksAmount = BRICKS_AMOUNT;
+
+	// Init life count
+	mGameManager->DrawLife();
 }
 
 void Game::Update(float deltaTime) {
-	if (IsKeyDown(KEY_RIGHT)) mPaddle->SetPositionX(mPaddle->GetPositionX() + PADDLE_SPEED);
-	if (IsKeyDown(KEY_LEFT)) mPaddle->SetPositionX(mPaddle->GetPositionX() - PADDLE_SPEED);
+	/*if (!mBallLaunched && IsKeyDown(KEY_SPACE)) {
+		mBall->Launch();
+		mBallLaunched = true;
+	}*/
+	if (IsKeyDown(KEY_RIGHT)) {
+		mPaddle->SetPositionX(mPaddle->GetPositionX() + PADDLE_SPEED);
+
+		/*if (!mBallLaunched) {
+			mBall->SetPosition(mPaddle->GetPositionX() + mPaddle->GetRect().width / 2, 990);
+		}*/
+	}
+	if (IsKeyDown(KEY_LEFT)) {
+		mPaddle->SetPositionX(mPaddle->GetPositionX() - PADDLE_SPEED);
+
+		/*if (!mBallLaunched) {
+			mBall->SetPosition(mPaddle->GetPositionX() + mPaddle->GetRect().width / 2, 990);
+		}*/
+	}
 
 	mBall->Move();
 
+	// Paddle ball bounce
 	if (CheckCollisionCircleRec(mBall->GetPosition(), mBall->GetRadius(), mPaddle->GetRect())) {
 		mBall->BounceY();
+		mBall->Replace(mPaddle->GetRect());
 	}
 
 	// Reverse x speed if the ball touch the screen borders
@@ -44,11 +68,18 @@ void Game::Update(float deltaTime) {
 	if (mBall->GetPosition().y <= BALL_RADIUS) {
 		mBall->BounceY();
 	}
+
+	// Didn't catch the ball
 	if (mBall->GetPosition().y >= WINDOW_SIZE.y - BALL_RADIUS) {
 		mBall->Init();
 		mBall->RandXBounce();
+		mGameManager->LoseHealth();
+		mBallLaunched = false;
+		mBall->Launch(); //TODO corriger
 	}
 
+
+	// Bricks draw and collisions
 	int indexToDelete = -1;
 
 	for (int i = 0; i < mBricksAmount; i++)
@@ -73,10 +104,13 @@ void Game::Update(float deltaTime) {
 		mBricksAmount--;
 	}
 
-	// Reverse x speed if the ball touch any brick and lower the brick health or delete it
+	if (mBricksAmount == 0) {
+		mGameManager->WinGame();
+	}
 }
 
 void Game::Draw() {
 	mPaddle->Draw();
 	mBall->Draw();
+	mGameManager->DrawLife();
 }

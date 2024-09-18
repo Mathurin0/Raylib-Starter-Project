@@ -1,6 +1,6 @@
 #include "sceneManager.h"
 
-SceneManager* sceneManager = nullptr;
+SceneManager* mSceneManager = nullptr;
 
 SceneManager::SceneManager() {
 	Init();
@@ -12,7 +12,7 @@ SceneManager::~SceneManager() {
 
 void SceneManager::Init() {
 	mCurrentScene = nullptr;
-	ChangeScene(GameScene);
+	ChangeScene(MenuScene);
 }
 
 void SceneManager::Update(float deltaTime) {
@@ -30,8 +30,20 @@ void SceneManager::ChangeScene(Scenes scene) {
 
 	switch (scene)
 	{
+		case MenuScene:
+			mCurrentScene = new Menu();
+			break;
+
 		case GameScene:
 			mCurrentScene = new Game();
+			break;
+
+		case LoseScene:
+			mCurrentScene = new Lose();
+			break;
+
+		case WinScene:
+			mCurrentScene = new Win();
 			break;
 	}
 }

@@ -1,4 +1,5 @@
 #include "application.h"
+#include "sceneManager.h"
 #include <iostream>
 
 Application::Application() {
