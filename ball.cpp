@@ -10,7 +10,7 @@ Ball::~Ball() {
 
 void Ball::Init() {
 	mPosition.x = 960;
-	mPosition.y = 800;
+	mPosition.y = 987;
 	mSpeedX = 0;
 	mSpeedY = 0;
 	mRadius = BALL_RADIUS;
@@ -30,12 +30,15 @@ void Ball::BounceY() {
 }
 
 void Ball::RandXBounce() {
-	mSpeedX += rand() % 2 + (-1);
-}
+	mSpeedX += rand() % 3 + (-3);
+	mSpeedY += .1f;
 
-void Ball::SetPosition(int xPos, int yPos) {
-	mPosition.x += xPos;
-	mPosition.y += yPos;
+	if (mSpeedX > BALL_SPEED * 2) {
+		mSpeedX = BALL_SPEED * 2;
+	}
+	else if (mSpeedX < -BALL_SPEED * 2) {
+		mSpeedX = -BALL_SPEED * 2;
+	}
 }
 
 Vector2 Ball::GetPosition() {
@@ -65,4 +68,9 @@ void Ball::Replace(Rectangle paddleRect) {
 	if (mPosition.x > paddleRect.x + paddleRect.width) {
 		mPosition.x = paddleRect.x + paddleRect.width;
 	}
+}
+
+void Ball::PlaceTopPaddle(Rectangle paddleRect) {
+	mPosition.y = 987;
+	mPosition.x = paddleRect.x + (paddleRect.width / 2);
 }

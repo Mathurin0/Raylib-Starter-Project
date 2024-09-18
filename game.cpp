@@ -13,7 +13,6 @@ void Game::Init() {
 	mBall = new Ball();
 	mGameManager = new GameManager();
 	mBallLaunched = false;
-	mBall->Launch(); //TODO corriger
 
 	// Init bricks
 	for (int i = 0; i < BRICKS_AMOUNT; i++)
@@ -34,23 +33,24 @@ void Game::Init() {
 }
 
 void Game::Update(float deltaTime) {
-	/*if (!mBallLaunched && IsKeyDown(KEY_SPACE)) {
+	if (!mBallLaunched && IsKeyDown(KEY_SPACE)) {
 		mBall->Launch();
+		mBall->RandXBounce();
 		mBallLaunched = true;
-	}*/
+	}
 	if (IsKeyDown(KEY_RIGHT)) {
 		mPaddle->SetPositionX(mPaddle->GetPositionX() + PADDLE_SPEED);
 
-		/*if (!mBallLaunched) {
-			mBall->SetPosition(mPaddle->GetPositionX() + mPaddle->GetRect().width / 2, 990);
-		}*/
+		if (!mBallLaunched) {
+			mBall->PlaceTopPaddle(mPaddle->GetRect());
+		}
 	}
 	if (IsKeyDown(KEY_LEFT)) {
 		mPaddle->SetPositionX(mPaddle->GetPositionX() - PADDLE_SPEED);
 
-		/*if (!mBallLaunched) {
-			mBall->SetPosition(mPaddle->GetPositionX() + mPaddle->GetRect().width / 2, 990);
-		}*/
+		if (!mBallLaunched) {
+			mBall->PlaceTopPaddle(mPaddle->GetRect());
+		}
 	}
 
 	mBall->Move();
@@ -59,6 +59,7 @@ void Game::Update(float deltaTime) {
 	if (CheckCollisionCircleRec(mBall->GetPosition(), mBall->GetRadius(), mPaddle->GetRect())) {
 		mBall->BounceY();
 		mBall->Replace(mPaddle->GetRect());
+		mBall->RandXBounce();
 	}
 
 	// Reverse x speed if the ball touch the screen borders
@@ -72,10 +73,9 @@ void Game::Update(float deltaTime) {
 	// Didn't catch the ball
 	if (mBall->GetPosition().y >= WINDOW_SIZE.y - BALL_RADIUS) {
 		mBall->Init();
-		mBall->RandXBounce();
 		mGameManager->LoseHealth();
+		mBall->PlaceTopPaddle(mPaddle->GetRect());
 		mBallLaunched = false;
-		mBall->Launch(); //TODO corriger
 	}
 
 

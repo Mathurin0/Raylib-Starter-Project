@@ -14,9 +14,9 @@ public :
 	void BounceY();
 	void RandXBounce();
 	void Replace(Rectangle paddleRect);
+	void PlaceTopPaddle(Rectangle paddleRect);
 	void Launch();
 
-	void SetPosition(int xPos, int yPos);
 	Vector2 GetPosition();
 	float GetRadius();
 
